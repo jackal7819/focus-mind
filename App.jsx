@@ -4,7 +4,7 @@ import Focus from './components/Focus';
 import { Platform } from 'react-native';
 import { colors } from './utils/colors';
 
-export default function App() {
+const App = () => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Focus/>
@@ -12,13 +12,12 @@ export default function App() {
 	);
 }
 
+export default App;
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: colors.darkBlue,
 		paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-	},
-	text: {
-		color: colors.white,
 	},
 });

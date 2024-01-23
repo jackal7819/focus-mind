@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import { TextInput } from 'react-native-paper';
 import { colors } from '../utils/colors';
 
 const Focus = () => {
 	return (
 		<View style={styles.container}>
-			<Text>Focus Screen</Text>
+			<View style={styles.inputContainer}>
+				<TextInput label='What would you like to focus on?' />
+			</View>
 		</View>
 	);
 };
@@ -15,6 +18,11 @@ export default Focus;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+	},
+	inputContainer: {
+		flex: 0.5,
+		padding: 30,
+		justifyContent: 'top',
 	},
 	text: {
 		color: colors.white,
