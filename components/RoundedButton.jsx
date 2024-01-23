@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import { colors } from '../utils/colors';
 
@@ -20,15 +20,16 @@ const RoundedButton = ({
 
 export default RoundedButton;
 
-const styles = (size) => ({
-	radius: {
-		borderRadius: size / 2,
-		width: size,
-		height: size,
-		alignItems: 'center',
-		justifyContent: 'center',
-        borderColor: colors.white,
-        borderWidth: 2,
-	},
-    text: { color: colors.white, fontSize: size / 3 },
-});
+const styles = (size) =>
+	StyleSheet.create({
+		radius: {
+			borderRadius: size / 2,
+			width: size,
+			height: size,
+			alignItems: 'center',
+			justifyContent: 'center',
+			borderColor: colors.lightGray,
+			borderWidth: 2,
+		},
+		text: { color: colors.white, fontSize: size / 3 },
+	});
