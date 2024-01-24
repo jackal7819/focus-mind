@@ -1,3 +1,4 @@
+import { MD3Colors, ProgressBar } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
 import { fontSizes, spacing } from '../utils/sizes';
 
@@ -8,19 +9,27 @@ import { useState } from 'react';
 
 const Timer = ({ focusSubject }) => {
 	const [isStarted, setIsStarted] = useState(false);
+	const [progress, setProgress] = useState(1);
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.countdown}>
 				<CountDown
 					isPaused={!isStarted}
-					onProgress={() => {}}
+					onProgress={setProgress}
 					onEnd={() => {}}
 				/>
-				<View style={styles.textWrapper}>
+				<View style={styles.textContainer}>
 					<Text style={styles.title}>Focusing on:</Text>
 					<Text style={styles.task}>{focusSubject}</Text>
 				</View>
+			</View>
+			<View style={styles.progressContainer}>
+				<ProgressBar
+					progress={progress}
+					color={colors.lightBlue}
+					style={styles.progress}
+				/>
 			</View>
 			<View style={styles.buttonWrapper}>
 				{!isStarted && (
@@ -58,8 +67,14 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	textWrapper: {
+	textContainer: {
 		paddingTop: spacing.xxl,
+	},
+	progressContainer: {
+		paddingTop: spacing.sm,
+	},
+	progress: {
+		height: spacing.sm,
 	},
 	title: {
 		color: colors.white,
