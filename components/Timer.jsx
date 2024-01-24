@@ -1,7 +1,9 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { fontSizes, spacing } from '../utils/sizes';
 
 import { CountDown } from './CountDown';
 import RoundedButton from './RoundedButton';
+import { colors } from '../utils/colors';
 import { useState } from 'react';
 
 const Timer = ({ focusSubject }) => {
@@ -15,6 +17,10 @@ const Timer = ({ focusSubject }) => {
 					onProgress={() => {}}
 					onEnd={() => {}}
 				/>
+				<View style={styles.textWrapper}>
+					<Text style={styles.title}>Focusing on:</Text>
+					<Text style={styles.task}>{focusSubject}</Text>
+				</View>
 			</View>
 			<View style={styles.buttonWrapper}>
 				{!isStarted && (
@@ -51,5 +57,19 @@ const styles = StyleSheet.create({
 		padding: 15,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	textWrapper: {
+		paddingTop: spacing.xxl,
+	},
+	title: {
+		color: colors.white,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		fontSize: fontSizes.lg,
+	},
+	task: {
+		color: colors.white,
+		textAlign: 'center',
+		fontSize: fontSizes.lg,
 	},
 });
