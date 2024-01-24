@@ -1,7 +1,7 @@
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
 import Focus from './components/Focus';
-import { Platform } from 'react-native';
+import Timer from './components/Timer';
 import { colors } from './utils/colors';
 import { useState } from 'react';
 
@@ -13,11 +13,11 @@ const App = () => {
 			{!currentSubject ? (
 				<Focus addSubject={setCurrentSubject} />
 			) : (
-				<View>
-					<Text style={styles.text}>
-						I am going to render the timer for {currentSubject}
-					</Text>
-				</View>
+				<Timer
+					focusSubject={currentSubject}
+					onTimerEnd={() => {}}
+					clearSubject={() => {}}
+				/>
 			)}
 		</SafeAreaView>
 	);
@@ -33,5 +33,5 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		color: colors.white,
-	}
+	},
 });

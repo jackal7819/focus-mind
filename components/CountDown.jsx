@@ -1,6 +1,8 @@
-import { React, useEffect, useRef } from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { fontSizes, spacing } from '../utils/sizes';
+import { useEffect, useRef, useState } from 'react';
 
-import { fontSizes } from '../utils/sizes';
+import { colors } from '../utils/colors';
 
 const minuteToMilliseconds = (min) => min * 10000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
@@ -38,7 +40,7 @@ export const CountDown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
 		interval.current = setInterval(countDown, 1000);
 
 		return () => clearInterval(interval.current);
-	}, isPaused);
+	}, [isPaused]);
 
 	const minute = Math.floor(milliseconds / 1000 / 60) % 60;
 	const seconds = Math.floor(milliseconds / 1000) % 60;
@@ -52,10 +54,11 @@ export const CountDown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: fontSizes.xxl,
+        fontSize: fontSizes.xxxl,
         fontWeight: 'bold',
         color: colors.white,
         padding: spacing.lg,
         backgroundColor: '#5e84e24c',
+        borderRadius: spacing.sm,
     }
 })

@@ -31,5 +31,5 @@ const styles = (size) =>
 			borderColor: colors.lightGray,
 			borderWidth: 2,
 		},
-		text: { color: colors.white, fontSize: size / 3 },
+		text: { color: colors.white, fontSize: size / 4 },
 	});
