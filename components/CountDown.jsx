@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { colors } from '../utils/colors';
 
-const minuteToMilliseconds = (min) => min * 10000 * 60;
+const minuteToMilliseconds = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
 export const CountDown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {

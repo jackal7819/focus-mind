@@ -1,8 +1,8 @@
-import { MD3Colors, ProgressBar } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, Vibration, View } from 'react-native';
 import { fontSizes, spacing } from '../utils/sizes';
 
 import { CountDown } from './CountDown';
+import { ProgressBar } from 'react-native-paper';
 import RoundedButton from './RoundedButton';
 import { colors } from '../utils/colors';
 import { useState } from 'react';
@@ -10,14 +10,24 @@ import { useState } from 'react';
 const Timer = ({ focusSubject }) => {
 	const [isStarted, setIsStarted] = useState(false);
 	const [progress, setProgress] = useState(1);
+	const [minutes, setMinutes] = useState(0.2);
+
+	const ONE_SECOND_IN_MS = 1000;
+
+	const PATTERN = [
+		1 * ONE_SECOND_IN_MS,
+		1 * ONE_SECOND_IN_MS,
+		1 * ONE_SECOND_IN_MS,
+	];
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.countdown}>
 				<CountDown
+					minutes={minutes}
 					isPaused={!isStarted}
 					onProgress={setProgress}
-					onEnd={() => {}}
+					onEnd={Vibration.vibrate(PATTERN)}
 				/>
 				<View style={styles.textContainer}>
 					<Text style={styles.title}>Focusing on:</Text>
