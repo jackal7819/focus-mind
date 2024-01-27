@@ -1,16 +1,17 @@
-import { Platform, StyleSheet, Text, Vibration, View } from 'react-native';
+import { StyleSheet, Text, Vibration, View } from 'react-native';
 import { fontSizes, spacing } from '../utils/sizes';
 
 import { CountDown } from './CountDown';
 import { ProgressBar } from 'react-native-paper';
 import RoundedButton from './RoundedButton';
+import Timing from './Timing';
 import { colors } from '../utils/colors';
 import { useState } from 'react';
 
 const Timer = ({ focusSubject }) => {
 	const [isStarted, setIsStarted] = useState(false);
 	const [progress, setProgress] = useState(1);
-	const [minutes, setMinutes] = useState(0.2);
+	const [minutes, setMinutes] = useState(0.1);
 
 	const ONE_SECOND_IN_MS = 1000;
 
@@ -41,6 +42,10 @@ const Timer = ({ focusSubject }) => {
 					style={styles.progress}
 				/>
 			</View>
+
+			<View style={styles.timingWrapper}>
+				<Timing onChangeTime={setMinutes} />
+			</View>
 			<View style={styles.buttonWrapper}>
 				{!isStarted && (
 					<RoundedButton
@@ -54,6 +59,18 @@ const Timer = ({ focusSubject }) => {
 						onPress={() => setIsStarted(false)}
 					/>
 				)}
+			</View>
+			<View style={styles.clearSubjectWrapper}>
+				<RoundedButton
+					size={spacing.xxxv}
+					title='MINUS'
+					onPress={() => onChangeTime(20)}
+				/>
+				<RoundedButton
+					size={spacing.xxxv}
+					title='PLUS'
+					onPress={() => onChangeTime(20)}
+				/>
 			</View>
 		</View>
 	);
@@ -70,12 +87,23 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
+	clearSubjectWrapper: {
+		flex: 0.1,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		paddingBottom: spacing.xxl,
+	},
 	buttonWrapper: {
 		flex: 0.3,
 		flexDirection: 'row',
-		padding: 15,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	timingWrapper: {
+		flex: 0.1,
+		flexDirection: 'row',
+		paddingTop: spacing.xxl,
+		paddingBottom: spacing.xl,
 	},
 	textContainer: {
 		paddingTop: spacing.xxl,

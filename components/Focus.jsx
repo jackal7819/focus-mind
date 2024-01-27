@@ -18,8 +18,8 @@ const Focus = ({ addSubject }) => {
 					onChangeText={(subject) => setSubject(subject)}
 				/>
 				<RoundedButton
-					title='+'
-					size={spacing.xxl}
+					title='PRESS'
+					size={spacing.xxxl}
 					onPress={() => addSubject(subject)}
 				/>
 			</View>
