@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { colors } from '../utils/colors';
 
-const minuteToMilliseconds = (min) => min * 1000 * 60;
+const minutesToMilliseconds = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
 export const CountDown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
@@ -12,10 +12,13 @@ export const CountDown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
 
 	const [milliseconds, setMilliseconds] = useState(null);
 
+	const reset = () => setMilliseconds(minutesToMilliseconds(minutes));
+
 	const countDown = () => {
 		setMilliseconds((time) => {
 			if (time === 0) {
 				clearInterval(interval.current);
+				onEnd(reset);
 				return time;
 			}
 			const timeLeft = time - 1000;
@@ -24,11 +27,11 @@ export const CountDown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
 	};
 
 	useEffect(() => {
-		setMilliseconds(minuteToMilliseconds(minutes));
+		setMilliseconds(minutesToMilliseconds(minutes));
 	}, [minutes]);
 
 	useEffect(() => {
-		onProgress(milliseconds / minuteToMilliseconds(minutes));
+		onProgress(milliseconds / minutesToMilliseconds(minutes));
 	}, [milliseconds]);
 
 	useEffect(() => {

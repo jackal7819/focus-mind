@@ -9,7 +9,7 @@ const Timing = ({ onChangeTime }) => {
 			<View style={styles.timingButton}>
 				<RoundedButton
 					size={spacing.xxxv}
-					title='100'
+					title='10'
 					onPress={() => onChangeTime(10)}
 				/>
 			</View>

@@ -8,7 +8,7 @@ import Timing from './Timing';
 import { colors } from '../utils/colors';
 import { useState } from 'react';
 
-const Timer = ({ focusSubject }) => {
+const Timer = ({ focusSubject, clearSubject }) => {
 	const [isStarted, setIsStarted] = useState(false);
 	const [progress, setProgress] = useState(1);
 	const [minutes, setMinutes] = useState(0.1);
@@ -21,6 +21,13 @@ const Timer = ({ focusSubject }) => {
 		1 * ONE_SECOND_IN_MS,
 	];
 
+	const onEnd = (reset) => {
+		Vibration.vibrate(PATTERN);
+		setIsStarted(false);
+		setProgress(1);
+		reset();
+	}
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.countdown}>
@@ -28,7 +35,7 @@ const Timer = ({ focusSubject }) => {
 					minutes={minutes}
 					isPaused={!isStarted}
 					onProgress={setProgress}
-					onEnd={Vibration.vibrate(PATTERN)}
+					onEnd={onEnd}
 				/>
 				<View style={styles.textContainer}>
 					<Text style={styles.title}>Focusing on:</Text>
@@ -63,13 +70,8 @@ const Timer = ({ focusSubject }) => {
 			<View style={styles.clearSubjectWrapper}>
 				<RoundedButton
 					size={spacing.xxxv}
-					title='MINUS'
-					onPress={() => onChangeTime(20)}
-				/>
-				<RoundedButton
-					size={spacing.xxxv}
-					title='PLUS'
-					onPress={() => onChangeTime(20)}
+					title='DELETE'
+					onPress={clearSubject}
 				/>
 			</View>
 		</View>
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
 	clearSubjectWrapper: {
 		flex: 0.1,
 		flexDirection: 'row',
-		justifyContent: 'space-around',
+		justifyContent: 'center',
 		paddingBottom: spacing.xxl,
 	},
 	buttonWrapper: {
