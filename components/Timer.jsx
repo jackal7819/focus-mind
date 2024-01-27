@@ -6,9 +6,11 @@ import { ProgressBar } from 'react-native-paper';
 import RoundedButton from './RoundedButton';
 import Timing from './Timing';
 import { colors } from '../utils/colors';
+import { useKeepAwake } from 'expo-keep-awake';
 import { useState } from 'react';
 
-const Timer = ({ focusSubject, clearSubject }) => {
+const Timer = ({ focusSubject, clearSubject, onTimerEnd }) => {
+	useKeepAwake();
 	const [isStarted, setIsStarted] = useState(false);
 	const [progress, setProgress] = useState(1);
 	const [minutes, setMinutes] = useState(0.1);
@@ -26,6 +28,7 @@ const Timer = ({ focusSubject, clearSubject }) => {
 		setIsStarted(false);
 		setProgress(1);
 		reset();
+		onTimerEnd(focusSubject);
 	}
 
 	return (
@@ -49,7 +52,6 @@ const Timer = ({ focusSubject, clearSubject }) => {
 					style={styles.progress}
 				/>
 			</View>
-
 			<View style={styles.timingWrapper}>
 				<Timing onChangeTime={setMinutes} />
 			</View>
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	countdown: {
-		flex: 0.5,
+		flex: 0.45,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -126,5 +128,6 @@ const styles = StyleSheet.create({
 		color: colors.white,
 		textAlign: 'center',
 		fontSize: fontSizes.lg,
+		paddingTop: spacing.sm,
 	},
 });

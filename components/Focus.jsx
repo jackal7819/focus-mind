@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
+import { fontSizes, spacing } from '../utils/sizes';
 
 import RoundedButton from './RoundedButton';
 import { TextInput } from 'react-native-paper';
-import { spacing } from '../utils/sizes';
 import { useState } from 'react';
 
 const Focus = ({ addSubject }) => {
@@ -30,9 +30,6 @@ const Focus = ({ addSubject }) => {
 export default Focus;
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
 	inputContainer: {
 		padding: spacing.xl,
 		gap: spacing.md,
@@ -41,5 +38,6 @@ const styles = StyleSheet.create({
 	},
 	textInput: {
 		flex: 1,
+		fontSize: fontSizes.md,
 	},
 });
